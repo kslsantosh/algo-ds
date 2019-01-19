@@ -31,12 +31,12 @@ public class MirrorTree {
 		System.out.println("Done inputting nodes");
 		
 		System.out.println("Preorder before mirroring");
-		insertPreorder(root, beforeMirror);
+		printPreorder(root);
 		
 		// Now mirror the tree
 		mirrorTree(root);
 		
-		insertPreorder(root, afterMirror);
+		printPreorder(root);
 				
 		// Scan the required mirror nodes
 		List<Integer> testCases = new ArrayList<>();
@@ -83,15 +83,11 @@ public class MirrorTree {
 		}
 	}
 	
-	private static void insertPreorder(Node root, List<Integer> orderList) {
+	private static void printPreorder(Node root) {
 		if(root != null) {
-			//System.out.println(root.data);
-			orderList.add(root.data);
-			insertPreorder(root.left, orderList);
-			insertPreorder(root.right, orderList);
-		}
-		else {
-			orderList.add(-1);
+			System.out.println(root.data);
+			printPreorder(root.left);
+			printPreorder(root.right);
 		}
 	}
 }
