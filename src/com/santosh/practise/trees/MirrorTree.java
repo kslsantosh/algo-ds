@@ -1,13 +1,17 @@
 package com.santosh.practise.trees;
 
+import com.santosh.practise.nodes.BinaryTreeNode;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.santosh.practise.trees.TreeBuilder.printPreorder;
+
 public class MirrorTree {
 	
-	static Node root = new Node(null, null, 1);
+	static BinaryTreeNode root = new BinaryTreeNode(null, null, 1);
 	static List<Integer> beforeMirror = new ArrayList<Integer>();
 	static List<Integer> afterMirror = new ArrayList<>();
 	
@@ -51,9 +55,9 @@ public class MirrorTree {
 	}
 	
 	
-	private static void mirrorTree(Node root) {
+	private static void mirrorTree(BinaryTreeNode root) {
 		if(root != null) {
-			Node temp = root.left;
+			BinaryTreeNode temp = root.left;
 			root.left = root.right;
 			root.right = temp;
 			
@@ -62,12 +66,12 @@ public class MirrorTree {
 		}
 	}
 
-	private static void insertHelper(Node root, int parent, int data, String direction) {
+	private static void insertHelper(BinaryTreeNode root, int parent, int data, String direction) {
 		
 		if(root != null) {
 			if(root.data == parent) {
 				// Found the parent node, create a node and add it to the direction given
-				Node newNode = new Node(null, null, data);
+				BinaryTreeNode newNode = new BinaryTreeNode(null, null, data);
 				
 				if(direction.equals("L")) {
 					root.left = newNode;
@@ -81,24 +85,5 @@ public class MirrorTree {
 				insertHelper(root.right, parent, data, direction);
 			}
 		}
-	}
-	
-	private static void printPreorder(Node root) {
-		if(root != null) {
-			System.out.println(root.data);
-			printPreorder(root.left);
-			printPreorder(root.right);
-		}
-	}
-}
-
-class Node {
-	Node left, right;
-	int data;
-	
-	Node(Node left, Node right, int data) {
-		this.left = left;
-		this.right = right;
-		this.data = data;
 	}
 }
