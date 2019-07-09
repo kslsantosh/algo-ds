@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class LeastCommonAncestor {
+public class BTLeastCommonAncestor {
     public static void main(String[] args) {
         BinaryTreeNode rootNode = TreeBuilder.buildBinaryTree();
         Scanner s = new Scanner(System.in);
