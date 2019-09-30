@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Graph {
     public int v; // number of vertices
-    public LinkedList<Integer> adjacentNodes[]; // array of lined lists for maintaining adjacency list
+    public LinkedList<Integer> adjacentNodes[]; // array of linked lists for maintaining adjacency list
     int arr[] = new int[10];
 
     public Graph(int v) {

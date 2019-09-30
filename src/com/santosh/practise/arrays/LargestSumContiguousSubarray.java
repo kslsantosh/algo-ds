@@ -4,54 +4,21 @@ public class LargestSumContiguousSubarray {
 	
 	public void maxContiguousSum(int[] arr) {
 		int maxTillNow = arr[0];
-        int sumTillNow = arr[0];
-        int overallMax = arr[0]; // useful when all given values are negative
-        int positiveSum = arr[0] > 0 ? arr[0] : 0;
-        boolean allNegative = true;
-        if(arr[0] > 0) {
-            allNegative = false;
-        }
-        for(int i=1 ; i<arr.length; i++) {
-            if(arr[i] > 0) {
-                positiveSum += arr[i];
-                allNegative = false;
+		int currentSum = arr[0];
+
+		for(int i = 1; i < arr.length; i++) {
+		    currentSum = currentSum + arr[i];
+
+		    // check if this current sum is > max we have till now
+            if(currentSum > maxTillNow) {
+                maxTillNow = currentSum;
             }
-            int tempSum = sumTillNow + arr[i];
-            if(sumTillNow < tempSum) {
-                // some increasing number has come
-                if(sumTillNow > 0) {
-                    sumTillNow = tempSum;
-                    if(sumTillNow > maxTillNow) {
-                        maxTillNow = sumTillNow;
-                    }
-                }
-                else {
-                    sumTillNow = arr[i];
-                    if(sumTillNow > maxTillNow) {
-                        maxTillNow = sumTillNow;
-                    }
-                }
-            }
-            else {
-                sumTillNow = tempSum;
-            }
-            if(overallMax < arr[i]) {
-                overallMax = arr[i];
+            // if current sum is negative, there is no point in taking this sum more forward, because it will not increase the sum
+            // So set it to 0 so that atleast from now if we get positive numbers it can increase the global sum.
+            if(currentSum < 0) {
+                currentSum = 0;
             }
         }
-        if(allNegative) {
-            System.out.print(overallMax);
-        }
-        else {
-            System.out.print(maxTillNow);
-        }
-        System.out.print(" ");
-        if(allNegative) {
-            System.out.print(overallMax);
-        }
-        else {
-            System.out.print(positiveSum);
-        }
-        System.out.println();
+        System.out.println("Max number is:" + maxTillNow);
 	}
 }
