@@ -9,4 +9,12 @@ public class BinaryTreeNode {
         this.right = right;
         this.data = data;
     }
+
+    public BinaryTreeNode(int i) {
+        this.data = i;
+    }
+
+    public BinaryTreeNode() {
+
+    }
 }

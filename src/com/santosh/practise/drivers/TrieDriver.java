@@ -5,7 +5,7 @@ import com.santosh.practise.trees.Trie;
 public class TrieDriver {
 
 	public static void main(String[] args) {
-		String words[] = {"Car", "Ball", "Santosh" , "Padmaja", "Venkatesh"};
+		String words[] = {"Car", "Ball", "Santosh" , "Padmaja", "Venkatesh", "Venkatesh1", "Venkatesh2"};
 		
 		Trie trie = new Trie();
 		
@@ -14,8 +14,10 @@ public class TrieDriver {
 			System.out.println("Inserted" + words[i]);
 		}
 		
-		if(trie.search("Venkatesh")) {
+		if(trie.search("Venkatesh1")) {
 			System.out.println("Successful!!!!");
 		}
+
+		trie.prefixSearch("Venk");
 	}
 }

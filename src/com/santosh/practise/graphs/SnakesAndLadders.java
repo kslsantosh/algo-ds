@@ -70,9 +70,10 @@ public class SnakesAndLadders {
 
             LinkedList<Integer> adjacentNodes = adjacencyList[currentNode];
             for(int i = 0; i < adjacentNodes.size(); i++) {
-                if(levels[adjacentNodes.get(i)] == -1) {
-                    levels[adjacentNodes.get(i)] = levels[currentNode+1]; // setting the level of adjacent vertex
-                    parents[adjacentNodes.get(i)] = currentNode;
+                int currentElement = adjacentNodes.get(i);
+                if(levels[currentElement] == -1) {
+                    levels[currentElement] = levels[currentNode]+1; // setting the level of adjacent vertex
+                    parents[currentElement] = currentNode;
                     queue.add(adjacentNodes.get(i));
                 }
             }
