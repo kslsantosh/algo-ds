@@ -8,10 +8,10 @@ public class LargestSumContiguousSubarray {
 
 		for(int i = 1; i < arr.length; i++) {
 
-		    if(arr[i] > maxTillNow) {
-		        maxTillNow = arr[i];
+            if(arr[i] > currentSum && currentSum <0) {currentSum = arr[i];}
+            else {
+                currentSum = currentSum + arr[i];
             }
-		    currentSum = currentSum + arr[i];
 
 		    // check if this current sum is > max we have till now
             if(currentSum > maxTillNow) {

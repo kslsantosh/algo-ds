@@ -8,6 +8,7 @@ public class SubArrayWithSumK {
 
     private static void subArraySumEqualsK(int[] arr, int k) {
         int currentSum = arr[0];
+        if(currentSum == k) System.out.println("Found Sum @ 0");
         int startingIndex = 0;
         for(int i = 1; i < arr.length-1; i++) {
             currentSum = currentSum+arr[i];

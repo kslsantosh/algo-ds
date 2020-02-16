@@ -4,7 +4,7 @@ import com.santosh.practise.nodes.BinaryTreeNode;
 
 import java.util.Scanner;
 
-public class NodesAtKDistanceFromRoot {
+    public class NodesAtKDistanceFromRoot {
     public static void main(String[] args) {
         BinaryTreeNode rootNode = TreeBuilder.buildBinaryTree();
         Scanner s = new Scanner(System.in);

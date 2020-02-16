@@ -5,8 +5,6 @@ Input: [7,1,5,3,6,4]
         Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
         Not 7-1 = 6, as selling price needs to be larger than buying price.*/
 
-import org.omg.CORBA.INTERNAL;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -15,12 +13,14 @@ public class MaxProfit {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         System.out.println("Enter the size");
-        int length = s.nextInt();
-        int[] stockPrices = new int[length];
-        for(int i = 0; i < length; i++) {
-            stockPrices[i] = s.nextInt();
-        }
-        findMaxProfit(stockPrices);
+        //int length = s.nextInt();
+//        int[] stockPrices = new int[]{7,1,5,3,6,4};
+        int[] stockPrices = new int[]{14,4,4,4,1,2};
+//        for(int i = 0; i < length; i++) {
+//            stockPrices[i] = s.nextInt();
+//        }
+        //findMaxProfit(stockPrices);
+        findMaxProfit_New(stockPrices);
     }
 
     private static void findMaxProfit(int[] stockPrices) {
@@ -45,7 +45,7 @@ public class MaxProfit {
                 //prices have increased, check the profit that you get by selling on this date
                 int profit = stockPrices[i] - stockPrices[buyDate];
                 totalProfit = totalProfit + profit;
-                    if(buyDate != sellDate) {
+                if(buyDate != sellDate) {
                     System.out.println("Buy On:" + buyDate);
                     System.out.println("Sell On:" + i + " Profit: " + profit);
                 }
@@ -57,5 +57,38 @@ public class MaxProfit {
         System.out.println("Buy On:" + buyDate);
         System.out.println("Sell On:" + sellDate);
         System.out.println("Total Profit:" + totalProfit);
+    }
+
+    private static void findMaxProfit_New(int[] stockPrices) {
+        int totalProfit = 0;
+        int buyDate = 0;
+        int lastProfitDate = 0;
+
+        for(int i = 1; i < stockPrices.length; i++) {
+
+            if(stockPrices[i] < stockPrices[lastProfitDate]) {
+                // there is a dip in price , so we need t0 sell it on the previous profit date
+                int profit = stockPrices[lastProfitDate] - stockPrices[buyDate];
+                totalProfit += profit;
+                if(profit > 0) {
+                    System.out.println("Buy On:" + buyDate);
+                    System.out.println("Sell On:" + lastProfitDate + " Profit: " + profit);
+                }
+                // buy on this date now.
+                buyDate = i;
+                lastProfitDate = i;
+
+            } else if (stockPrices[i] > stockPrices[lastProfitDate]) {
+                lastProfitDate = i;
+            }
+        }
+        if(buyDate != lastProfitDate) {
+            int profit = (stockPrices[lastProfitDate] - stockPrices[buyDate]);
+            totalProfit+= profit;
+            System.out.println("Buy On:" + buyDate);
+            System.out.println("Sell On:" + lastProfitDate + " Profit: " + profit);
+        }
+
+        System.out.println("Tottal Profit = "  + totalProfit);
     }
 }

@@ -9,7 +9,8 @@ public class KthSmallestElementInSortedMatrix {
     public static void main(String[] args) {
         int n = 3;
         int k = 3;
-        int[][] matrix = {{1,  5,  9},{10, 11, 13},{12, 13, 15}};
+        //int[][] matrix = {{1,  5,  9},{10, 11, 13},{12, 13, 15}};
+        int[][] matrix = {{1,  5,  5}};
         int kThSmallestElement = getKthSmallestElementFromSortedMartix(matrix, k);
         System.out.println("K th Smallest Element is::" + kThSmallestElement);
     }
