@@ -41,26 +41,50 @@ public class BTLeastCommonAncestor {
         }
     }
 
+//    private static boolean findPathToNode(BinaryTreeNode rootNode, int nodeToFind, List<Integer> pathToNode) {
+//
+//        if(rootNode == null) {
+//            return false;
+//        }
+//        if(rootNode != null && rootNode.data == nodeToFind) {
+//            pathToNode.add(rootNode.data);
+//            return true;
+//        }
+//        if(rootNode != null && rootNode.data != nodeToFind) {
+//            pathToNode.add(rootNode.data);
+//        }
+//        if(rootNode != null) {
+//            if(findPathToNode(rootNode.left, nodeToFind, pathToNode)) {
+//                return true;
+//            }
+//            if(findPathToNode(rootNode.right, nodeToFind, pathToNode)) {
+//                return true;
+//            }
+//        }
+//        pathToNode.remove(pathToNode.size()-1);
+//        return false;
+//    }
+
     private static boolean findPathToNode(BinaryTreeNode rootNode, int nodeToFind, List<Integer> pathToNode) {
 
         if(rootNode == null) {
             return false;
         }
-        if(rootNode != null && rootNode.data == nodeToFind) {
-            pathToNode.add(rootNode.data);
+        pathToNode.add(rootNode.data);
+
+        if(rootNode.data == nodeToFind) {
             return true;
         }
-        if(rootNode != null && rootNode.data != nodeToFind) {
-            pathToNode.add(rootNode.data);
+
+        boolean found = false;
+        found = findPathToNode(rootNode.left, nodeToFind, pathToNode);
+
+        if(! found) {
+            found = findPathToNode(rootNode.right, nodeToFind, pathToNode);
         }
-        if(rootNode != null) {
-            if(findPathToNode(rootNode.left, nodeToFind, pathToNode)) {
-                return true;
-            }
-            if(findPathToNode(rootNode.right, nodeToFind, pathToNode)) {
-                return true;
-            }
-        }
+
+        if(found) return true;
+
         pathToNode.remove(pathToNode.size()-1);
         return false;
     }
