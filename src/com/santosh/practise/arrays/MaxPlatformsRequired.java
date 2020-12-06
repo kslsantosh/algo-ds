@@ -1,6 +1,7 @@
 package com.santosh.practise.arrays;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class MaxPlatformsRequired {
@@ -21,6 +22,13 @@ public class MaxPlatformsRequired {
         }
         int minimumPlatformsRequired = getMinimumPlatformsRequired(arrivals, departures, trainsCount);
         System.out.println("Minimum Platforms Required = " + minimumPlatformsRequired);
+
+        String str = "Santosh P";
+        List<String> s1 = Arrays.asList(str.split(" "));
+        for(String x : s1) {
+            System.out.println(x);
+        }
+
     }
 
     private static int getMinimumPlatformsRequired(int[] arrivals, int[] departures, int trainsCount) {

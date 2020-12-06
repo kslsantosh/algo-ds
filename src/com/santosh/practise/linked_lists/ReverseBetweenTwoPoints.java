@@ -13,7 +13,8 @@ public class ReverseBetweenTwoPoints {
 
         int m = 3;
         int n = 4;
-        ListNode listNode = removeBetweenTwoPoints(head, m, n);
+        //ListNode listNode = removeBetweenTwoPoints(head, m, n);
+        ListNode listNode = reverseBetweenTwoNodes2(head, m, n);
 
         System.out.println("Result::");
         while (listNode != null) {
@@ -68,5 +69,50 @@ public class ReverseBetweenTwoPoints {
             s1.next = e1;
             return s1;
         }
+    }
+
+
+    public static ListNode reverseBetweenTwoNodes2(ListNode head, int m, int n) {
+
+        ListNode newHead = head;
+
+        if(m==n) return head;
+
+        ListNode attachHead = null;
+        ListNode attachTail = null;
+
+        int counter = 1;
+
+        while (counter < m) {
+            counter++;
+            attachHead = head;
+            head = head.next;
+        }
+
+        // now counter is at m, and head is also at node m.
+        ListNode prev = null;
+        ListNode endOfReversedList = null;
+
+        while (counter < n) {
+            ListNode next = head.next;
+            head.next = prev;
+            if(prev == null) {
+                // this is the end of the reversed linked list
+                endOfReversedList = head;
+            }
+            prev = head;
+            head = next;
+            counter++;
+        }
+
+        // head is now at 4.
+        attachTail = head.next;
+        head.next = prev;
+
+        attachHead.next = head;
+        attachTail.next = endOfReversedList;
+
+        return newHead;
+
     }
 }

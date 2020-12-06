@@ -33,7 +33,7 @@ public class LongestPalindromeSubString {
             int left = i;
             int right = i+1;
 
-            // taking i,i+1 as center
+            // taking i,i+1 as center for
             while (left  >= 0 && right < str.length() && str.charAt(left) == str.charAt(right)) {
                 int evenLength = right-left + 1;
                 if(evenLength > maxLength) {

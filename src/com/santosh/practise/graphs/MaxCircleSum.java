@@ -7,6 +7,7 @@ public class MaxCircleSum {
         int[] arr = new int[]{4,4,1,4,13,8,8,8,0,8,14,9,15,11,-1,10,15,22,22,22,22,22,21};
 
         int maxCycleSum = findMaxCycleSum(arr);
+        System.out.println("MaxCycleSum->" + maxCycleSum);
     }
 
     private static int findMaxCycleSum(int[] arr) {

@@ -51,7 +51,8 @@ public class MakeNumberNFromM {
                     return numberOfOperations;
                 }
                 System.out.println("Adding to queue : " + currentNumber*2);
-                System.out.println("Adding to queue : " + (currentNumber-1));
+                System.out.println("Adding " +
+                        "to queue : " + (currentNumber-1));
             }
         }
         return numberOfOperations;

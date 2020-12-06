@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class TreeBuilder {
 
     public static BinaryTreeNode buildBinaryTree() {
-        BinaryTreeNode root = new BinaryTreeNode(null, null, 1);
+        BinaryTreeNode root = new BinaryTreeNode(null, null, 50);
         System.out.println("Input number of nodes");
         Scanner s = new Scanner(System.in);
         int totalNodes = s.nextInt();

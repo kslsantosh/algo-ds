@@ -2,10 +2,7 @@ package com.santosh.practise.graphs;
 
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class SnakesAndLadders {
     public static void main(String[] args) {
@@ -48,15 +45,21 @@ public class SnakesAndLadders {
 
         System.out.println("Adjacency List");
         printAdjacencyList(adjacencyList);
-        int[] parents = new int[++numVertices];
-        int[] levels = new int[++numLadders];
-        for(int i = 0; i<=numVertices; i++) {
+        int[] parents = new int[numVertices+1];
+        int[] levels = new int[numVertices+1];
+        for(int i = 1; i<=numVertices; i++) {
             parents[i] = -1;
             levels[i] = -1;
         }
-        bfs(adjacencyList, parents, levels, 1);
+        //bfs(adjacencyList, parents, levels, 1);
 
-        System.out.println("Minimum steps required::" + levels[100]);
+        //countMinSteps(adjacencyList, levels, 1);
+        System.out.println("Levels");
+        for(int i = 0; i < levels.length ;i++) {
+            System.out.println("number=" + i + " level" + levels[i]);
+        }
+
+        System.out.println("Minimum steps required::" + countMinSteps(adjacencyList, levels, 1));
     }
 
     private static void bfs(LinkedList<Integer>[] adjacencyList, int[] parents, int[] levels, int starting) {
@@ -79,6 +82,45 @@ public class SnakesAndLadders {
             }
             queue.poll();
         }
+    }
+
+    private static int countMinSteps(LinkedList<Integer>[] adjacencyList, int[] levels, int starting) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(starting);
+        levels[starting] = 0;
+        int numberOfMoves = 0;
+        boolean gameOver= false;
+
+        while (! gameOver) {
+            numberOfMoves++;
+            List<Integer> nodesOnList = new ArrayList<>();
+            if (q.isEmpty()) return numberOfMoves;
+            while (! q.isEmpty()) {
+                nodesOnList.add(q.poll());
+            }
+
+            for(Integer i : nodesOnList) {
+                System.out.println("Pricessing adjacency list of " + i);
+                for(int j : adjacencyList[i]) {
+                    System.out.println(i + "is having in list" + j);
+                    System.out.println("Levels[j]" + levels[j]);
+                    if(levels[j] == -1) {
+
+                        // it means it is not visited
+                        if(j == 30) {
+                            System.out.println("Returning from here with value " + (numberOfMoves+1));
+                            return numberOfMoves+1;
+                        } else {
+                            levels[j] = numberOfMoves;
+                            System.out.println("Adding " + j);
+                            q.add(j);
+                        }
+                    }
+                }
+            }
+        }
+
+        return -1;
     }
 
     private static void printAdjacencyList(LinkedList<Integer>[] adjacencyList) {

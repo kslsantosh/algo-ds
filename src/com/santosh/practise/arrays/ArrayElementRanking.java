@@ -12,10 +12,9 @@ import java.util.PriorityQueue;
 public class ArrayElementRanking {
     public static void main(String[] args) {
         int requiredMaxRank = 3;
-        //int[] arr = new int[]{5,6,7,1,3,3,3,7,5,3,2,7,8,5,4,3};
-        int[] arr = new int[]{13,12,12,14,17,12,13,11,11};
-//        int[] arr = new int[]{70,11,12,20,80,11,11,10};
-
+//        int[] arr = new int[]{5,6,7,1,3,3,3,7,5,3,2,7,8,5,4,3};
+//        int[] arr = new int[]{13,12,12,14,17,12,13,11,11};
+        int[] arr = new int[]{70,11,12,20,80,11,11,10};
         Integer topKRankElementCount = getTopKRankElements(arr, requiredMaxRank);
         System.out.println("Number of elements having higher or equal rank are:" + topKRankElementCount);
 
@@ -26,12 +25,11 @@ public class ArrayElementRanking {
         Map<Integer, Integer> freqMap = new HashMap<>(requiredMaxRank);
         Integer numberOfElements = 0;
         System.out.println(freqMap.size());
-
         for(Integer i  : arr) {
             if(freqMap.containsKey(i)) {
                 freqMap.put(i, freqMap.get(i) + 1);
                 numberOfElements = numberOfElements + 1;
-                minHeap.add(i);
+//                minHeap.add(i);
             } else {
                 if(freqMap.size() < requiredMaxRank) {
                     freqMap.put(i, 1);
@@ -54,7 +52,7 @@ public class ArrayElementRanking {
                 }
             }
         }
-
+        System.out.println("Min heap" + minHeap);
         System.out.println(freqMap);
         return numberOfElements;
     }

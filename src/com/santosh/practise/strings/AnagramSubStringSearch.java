@@ -2,21 +2,26 @@ package com.santosh.practise.strings;
 
 import java.util.*;
 
+/**
+ * Leet code 438
+ */
 public class AnagramSubStringSearch {
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Enter the main string");
-        String string = s.next();
-        System.out.println("Enter the sub string");
-        String subString = s.next();
+        //Scanner s = new Scanner(System.in);
+//        System.out.println("Enter the main string");
+        String string = "";
+//        System.out.println("Enter the sub string");
+        String subString = "a";
 
-        anagramSearch(string, subString);
+        List<Integer> indexes = anagramSearch(string, subString);
+        System.out.println(indexes);
     }
-    // TODO: NOT WORKING, NEED TO MODIFY
-    private static void anagramSearch(String string, String subString) {
+
+    private static List<Integer> anagramSearch(String string, String subString) {
+        if(subString.length() > string.length()) return new ArrayList<>();
         Map<Character, Integer> subStringFreqMap = new HashMap<>();
         Map<Character, Integer> stringFreqMap = new HashMap<>();
-
+        List<Integer> indexes = new ArrayList<>();
         int foundCount = 0;
         // load first k characters into map
         for(Character c : subString.toCharArray()) {
@@ -27,27 +32,32 @@ public class AnagramSubStringSearch {
             int currentFreq = stringFreqMap.getOrDefault(string.charAt(i), 0);
             stringFreqMap.put(string.charAt(i), ++currentFreq);
         }
+
         if(subStringFreqMap.equals(stringFreqMap)) {
-            System.out.println("Found At" + 0);
+            indexes.add(0);
         }
 
         for(int i=subString.length() ; i < string.length(); i++) {
-            Character previousCharacter = string.charAt(i-1);
+            Character previousCharacter = string.charAt(i-subString.length());
             if(stringFreqMap.containsKey(previousCharacter)) {
                 Integer prevCharacterFreq = stringFreqMap.get(previousCharacter);
-                stringFreqMap.put(previousCharacter, --prevCharacterFreq);
+                if(prevCharacterFreq == 1) {
+                    stringFreqMap.remove(previousCharacter); // should not insert with freq 0.
+                } else {
+                    stringFreqMap.put(previousCharacter, --prevCharacterFreq);
+                }
             }
 
             Character newCharacter = string.charAt(i);
             Integer newCharacterFreq = stringFreqMap.getOrDefault(newCharacter, 0);
-            if(subStringFreqMap.containsKey(newCharacter)) {
-                stringFreqMap.put(newCharacter, ++newCharacterFreq);
-            }
-            // comapre 2 hashmaps
+            stringFreqMap.put(newCharacter, ++newCharacterFreq);
 
             if(stringFreqMap.equals(subStringFreqMap)) {
-                System.out.println("Found At:" + i);
+                System.out.println("Found At:" + (i-subString.length() + 1));
+                indexes.add(i-subString.length() + 1);
             }
+
         }
+        return indexes;
     }
 }
